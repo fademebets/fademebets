@@ -8,19 +8,44 @@
   <link rel="icon" href="/favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
   <style>
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'Open Sans', sans-serif;
-      display: flex;
       background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    nav {
+      background-color: #c8102e;
+      padding: 1rem 2rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    nav .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      text-decoration: none;
+      color: white;
+    }
+    nav .menu a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+    }
+    .main {
+      display: flex;
+      flex: 1;
     }
     .sidebar {
       width: 200px;
       background-color: #1c2a39;
       color: white;
-      height: 100vh;
-      position: sticky;
-      top: 0;
       padding-top: 2rem;
     }
     .sidebar h3 {
@@ -34,7 +59,11 @@
     }
     .sidebar li {
       padding: 10px 20px;
-      cursor: pointer;
+    }
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      display: block;
     }
     .sidebar li:hover {
       background-color: #2d3e50;
@@ -43,34 +72,39 @@
       flex: 1;
       padding: 2rem;
     }
-    nav {
-      background-color: #c8102e;
-      padding: 1rem;
-      color: white;
-      text-align: center;
-      font-family: 'Montserrat', sans-serif;
-    }
     h1 {
       color: #c8102e;
     }
   </style>
 </head>
 <body>
-  <div class="sidebar">
-    <h3>Sports</h3>
-    <ul>
-      <li>NBA</li>
-      <li>NFL</li>
-      <li>NCAAF</li>
-      <li>NCAAB</li>
-      <li>MLB</li>
-      <li>UFC</li>
-    </ul>
-  </div>
-  <div class="content">
-    <nav>FadeMeBets — Born to Fade</nav>
-    <h1>Welcome to FadeMeBets</h1>
-    <p>Track +EV picks, see standings, and lock in smarter plays with our data-driven tools.</p>
+  <nav>
+    <a href="index.html" class="logo">FadeMeBets</a>
+    <div class="menu">
+      <a href="ev.html">+EV</a>
+      <a href="locks.html">Locks</a>
+      <a href="standings.html">Standings</a>
+      <a href="odds.html">Odds</a>
+      <a href="tools.html">Tools</a>
+    </div>
+  </nav>
+
+  <div class="main">
+    <div class="sidebar">
+      <h3>Sports</h3>
+      <ul>
+        <li><a href="nba.html">NBA</a></li>
+        <li><a href="nfl.html">NFL</a></li>
+        <li><a href="ncaaf.html">NCAAF</a></li>
+        <li><a href="ncaab.html">NCAAB</a></li>
+        <li><a href="mlb.html">MLB</a></li>
+        <li><a href="ufc.html">UFC</a></li>
+      </ul>
+    </div>
+    <div class="content">
+      <h1>Welcome to FadeMeBets</h1>
+      <p>Track smarter picks, ride the edge, and lock in data-backed winners. Filter by league or explore our full tools using the top navigation bar.</p>
+    </div>
   </div>
 </body>
 </html>
