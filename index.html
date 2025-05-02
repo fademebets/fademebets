@@ -25,12 +25,13 @@
       align-items: center;
       justify-content: space-between;
     }
-    nav .logo {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 1.4rem;
-      text-decoration: none;
-      color: white;
+    nav .logo-container {
+      display: flex;
+      align-items: center;
+    }
+    nav .logo-container img {
+      height: 40px;
+      margin-right: 10px;
     }
     nav .menu a {
       margin-left: 1.5rem;
@@ -75,11 +76,21 @@
     h1 {
       color: #c8102e;
     }
+    .lock-box {
+      background-color: #f4f4f4;
+      padding: 1rem 1.5rem;
+      border-left: 5px solid #c8102e;
+      margin-top: 2rem;
+      font-size: 1.1rem;
+    }
   </style>
 </head>
 <body>
   <nav>
-    <a href="index.html" class="logo">FadeMeBets</a>
+    <div class="logo-container">
+      <img src="/logo.png" alt="FadeMeBets Logo">
+      <span class="logo-text">FadeMeBets</span>
+    </div>
     <div class="menu">
       <a href="ev.html">+EV</a>
       <a href="locks.html">Locks</a>
@@ -104,6 +115,10 @@
     <div class="content">
       <h1>Welcome to FadeMeBets</h1>
       <p>Track smarter picks, ride the edge, and lock in data-backed winners. Filter by league or explore our full tools using the top navigation bar.</p>
+
+      <div class="lock-box">
+        🔒 <strong>Lock of the Day:</strong> Mikal Bridges o6.5 REB + AST — 88% cover, +21% EV
+      </div>
     </div>
   </div>
 </body>
