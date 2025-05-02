@@ -1,8 +1,8 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>FadeMeBets - Standings</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
   <style>
@@ -14,10 +14,93 @@
       font-family: 'Montserrat', sans-serif;
       color: #c8102e;
     }
+    select {
+      font-size: 1rem;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 1rem;
+    }
+    th, td {
+      padding: 0.75rem;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background-color: #f3f3f3;
+    }
+    .team-logo {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+    .wl-green {
+      color: green;
+      font-weight: bold;
+    }
+    .wl-red {
+      color: red;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <h1>Standings</h1>
-  <p>ATS standings, last 5 games, and point differentials will appear here.</p>
+  <h1>League Standings</h1>
+  <label for="conference-filter">Filter by Conference:</label>
+  <select id="conference-filter" onchange="filterConference()">
+    <option value="all">All</option>
+    <option value="afc">AFC</option>
+    <option value="nfc">NFC</option>
+  </select>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Team</th>
+        <th>ATS Record</th>
+        <th>Last 5 Games</th>
+        <th>Avg Point Diff</th>
+        <th>Home</th>
+        <th>Away</th>
+      </tr>
+    </thead>
+    <tbody id="standings-body">
+      <tr data-conference="afc">
+        <td><img src="logo.png" class="team-logo" alt="BUF">Buffalo Bills</td>
+        <td>10-7</td>
+        <td><span class="wl-green">W</span> <span class="wl-red">L</span> <span class="wl-green">W</span> <span class="wl-green">W</span> <span class="wl-red">L</span></td>
+        <td>+5.2</td>
+        <td>6-2</td>
+        <td>4-5</td>
+      </tr>
+      <tr data-conference="nfc">
+        <td><img src="logo.png" class="team-logo" alt="PHI">Philadelphia Eagles</td>
+        <td>9-8</td>
+        <td><span class="wl-red">L</span> <span class="wl-red">L</span> <span class="wl-green">W</span> <span class="wl-green">W</span> <span class="wl-red">L</span></td>
+        <td>+2.4</td>
+        <td>5-3</td>
+        <td>4-5</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    function filterConference() {
+      const selected = document.getElementById('conference-filter').value;
+      const rows = document.querySelectorAll('#standings-body tr');
+      rows.forEach(row => {
+        if (selected === 'all' || row.dataset.conference === selected) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+  </script>
 </body>
 </html>
