@@ -2,27 +2,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>FadeMeBets - Index</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FadeMeBets - Home</title>
   <link rel="icon" href="/favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Open Sans', sans-serif; padding: 2rem; }
-    .home-logo {
-      position: absolute;
-      top: 10px;
-      left: 20px;
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
-    .home-logo img {
+    nav {
+      background-color: #c8102e;
+      padding: 1rem 2rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    nav .logo-container {
+      display: flex;
+      align-items: center;
+    }
+    nav .logo-container img {
       height: 40px;
-      cursor: pointer;
+      margin-right: 10px;
     }
-    h1 { color: #c8102e; padding-top: 60px; }
+    nav .menu a {
+      margin-left: 1rem;
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+    }
+    .main {
+      display: flex;
+      flex: 1;
+    }
+    .sidebar {
+      width: 200px;
+      background-color: #1c2a39;
+      color: white;
+      padding-top: 2rem;
+    }
+    .sidebar h3 {
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar li {
+      padding: 10px 20px;
+    }
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      display: block;
+    }
+    .sidebar li:hover {
+      background-color: #2d3e50;
+    }
+    .content {
+      flex: 1;
+      padding: 2rem;
+    }
+    h1 {
+      color: #c8102e;
+    }
+    .lock-box {
+      background-color: #f4f4f4;
+      padding: 1rem 1.5rem;
+      border-left: 5px solid #c8102e;
+      margin-top: 2rem;
+      font-size: 1.1rem;
+    }
   </style>
 </head>
 <body>
-  <a href="index.html" class="home-logo"><img src="logo.png" alt="FadeMeBets"></a>
-  <h1>Index</h1>
-  <p>Welcome to FadeMeBets — Track smarter picks and data-driven betting tools.</p>
+  <nav>
+    <div class="logo-container">
+      <img src="/logo.png" alt="FadeMeBets Logo">
+      <span class="logo-text">FadeMeBets</span>
+    </div>
+    <div class="menu">
+      <a href="ev.html">+EV</a>
+      <a href="locks.html">Locks</a>
+      <a href="standings.html">Standings</a>
+      <a href="odds.html">Odds</a>
+      <a href="tools.html">Tools</a>
+      <a href="ev-calculator.html">EV Calc</a>
+      <a href="parlay-calculator.html">Parlay Calc</a>
+      <a href="notifications.html">🔔 Alerts</a>
+    </div>
+  </nav>
+
+  <div class="main">
+    <div class="sidebar">
+      <h3>Sports</h3>
+      <ul>
+        <li><a href="nba.html">NBA</a></li>
+        <li><a href="nfl.html">NFL</a></li>
+        <li><a href="ncaaf.html">NCAAF</a></li>
+        <li><a href="ncaab.html">NCAAB</a></li>
+        <li><a href="mlb.html">MLB</a></li>
+        <li><a href="ufc.html">UFC</a></li>
+      </ul>
+    </div>
+    <div class="content">
+      <h1>Welcome to FadeMeBets</h1>
+      <p>Track smarter picks, ride the edge, and lock in data-backed winners. Filter by league or explore our full suite of tools using the top navigation bar.</p>
+      <div class="lock-box">
+        🔒 <strong>Lock of the Day:</strong> Mikal Bridges o6.5 REB + AST — 88% cover, +21% EV
+      </div>
+    </div>
+  </div>
 </body>
 </html>
