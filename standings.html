@@ -3,103 +3,108 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>FadeMeBets - Standings</title>
+  <title>FadeMeBets - Multi-League Standings</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Open Sans', sans-serif;
-      padding: 2rem;
+    body { font-family: 'Open Sans', sans-serif; padding: 2rem; }
+    h1 { font-family: 'Montserrat', sans-serif; color: #c8102e; }
+    .tabs { margin-bottom: 1rem; }
+    .tab-btn {
+      background-color: #eee;
+      border: none;
+      padding: 10px 15px;
+      margin-right: 5px;
+      font-weight: bold;
+      cursor: pointer;
     }
-    h1 {
-      font-family: 'Montserrat', sans-serif;
+    .tab-btn.active {
+      background-color: #c8102e;
+      color: white;
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .home-link {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      text-decoration: none;
       color: #c8102e;
-    }
-    select {
-      font-size: 1rem;
-      padding: 0.5rem;
-      margin-bottom: 1rem;
+      font-weight: bold;
     }
     table {
-      border-collapse: collapse;
       width: 100%;
+      border-collapse: collapse;
       margin-top: 1rem;
     }
     th, td {
-      padding: 0.75rem;
+      padding: 10px;
       border-bottom: 1px solid #ddd;
       text-align: center;
     }
-    th {
-      background-color: #f3f3f3;
-    }
     .team-logo {
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
+      margin-right: 8px;
       vertical-align: middle;
-      margin-right: 10px;
-    }
-    .wl-green {
-      color: green;
-      font-weight: bold;
-    }
-    .wl-red {
-      color: red;
-      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1>League Standings</h1>
-  <label for="conference-filter">Filter by Conference:</label>
-  <select id="conference-filter" onchange="filterConference()">
-    <option value="all">All</option>
-    <option value="afc">AFC</option>
-    <option value="nfc">NFC</option>
-  </select>
+  <a href="index.html" class="home-link">🏠 Home</a>
+  <h1>Multi-League Standings</h1>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('nfl')">NFL</button>
+    <button class="tab-btn" onclick="switchTab('nba')">NBA</button>
+    <button class="tab-btn" onclick="switchTab('ncaaf')">NCAAF</button>
+    <button class="tab-btn" onclick="switchTab('ncaab')">NCAAB</button>
+    <button class="tab-btn" onclick="switchTab('mlb')">MLB</button>
+    <button class="tab-btn" onclick="switchTab('ufc')">UFC</button>
+  </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Team</th>
-        <th>ATS Record</th>
-        <th>Last 5 Games</th>
-        <th>Avg Point Diff</th>
-        <th>Home</th>
-        <th>Away</th>
-      </tr>
-    </thead>
-    <tbody id="standings-body">
-      <tr data-conference="afc">
-        <td><img src="logo.png" class="team-logo" alt="BUF">Buffalo Bills</td>
-        <td>10-7</td>
-        <td><span class="wl-green">W</span> <span class="wl-red">L</span> <span class="wl-green">W</span> <span class="wl-green">W</span> <span class="wl-red">L</span></td>
-        <td>+5.2</td>
-        <td>6-2</td>
-        <td>4-5</td>
-      </tr>
-      <tr data-conference="nfc">
-        <td><img src="logo.png" class="team-logo" alt="PHI">Philadelphia Eagles</td>
-        <td>9-8</td>
-        <td><span class="wl-red">L</span> <span class="wl-red">L</span> <span class="wl-green">W</span> <span class="wl-green">W</span> <span class="wl-red">L</span></td>
-        <td>+2.4</td>
-        <td>5-3</td>
-        <td>4-5</td>
-      </tr>
-    </tbody>
-  </table>
+  <div id="nfl" class="tab-content active">
+    <table>
+      <thead><tr><th>Team</th><th>ATS</th><th>W/L</th><th>Diff</th></tr></thead>
+      <tbody>
+        <tr><td><img class="team-logo" src="logo.png" /> Chiefs</td><td>12-5</td><td>W-W-L-W-W</td><td>+6.3</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="nba" class="tab-content">
+    <table><thead><tr><th>Team</th><th>ATS</th><th>W/L</th><th>Diff</th></tr></thead><tbody>
+      <tr><td><img class="team-logo" src="logo.png" /> Lakers</td><td>43-39</td><td>W-L-W-L-W</td><td>+3.1</td></tr>
+    </tbody></table>
+  </div>
+  <div id="ncaaf" class="tab-content">
+    <table><thead><tr><th>Team</th><th>ATS</th><th>W/L</th><th>Diff</th></tr></thead><tbody>
+      <tr><td><img class="team-logo" src="logo.png" /> Georgia</td><td>13-1</td><td>W-W-W-W-L</td><td>+14.2</td></tr>
+    </tbody></table>
+  </div>
+  <div id="ncaab" class="tab-content">
+    <table><thead><tr><th>Team</th><th>ATS</th><th>W/L</th><th>Diff</th></tr></thead><tbody>
+      <tr><td><img class="team-logo" src="logo.png" /> Kansas</td><td>25-6</td><td>W-W-W-L-W</td><td>+10.5</td></tr>
+    </tbody></table>
+  </div>
+  <div id="mlb" class="tab-content">
+    <table><thead><tr><th>Team</th><th>ATS</th><th>W/L</th><th>Diff</th></tr></thead><tbody>
+      <tr><td><img class="team-logo" src="logo.png" /> Yankees</td><td>88-74</td><td>L-W-L-W-W</td><td>+2.7</td></tr>
+    </tbody></table>
+  </div>
+  <div id="ufc" class="tab-content">
+    <table><thead><tr><th>Fighter</th><th>Record</th><th>Streak</th></tr></thead>
+      <tbody>
+        <tr><td><img class="team-logo" src="logo.png" /> Jon Jones</td><td>27-1</td><td>W-W-W</td></tr>
+        <tr><td><img class="team-logo" src="logo.png" /> Islam Makhachev</td><td>25-1</td><td>W-W-W</td></tr>
+      </tbody>
+    </table>
+  </div>
 
   <script>
-    function filterConference() {
-      const selected = document.getElementById('conference-filter').value;
-      const rows = document.querySelectorAll('#standings-body tr');
-      rows.forEach(row => {
-        if (selected === 'all' || row.dataset.conference === selected) {
-          row.style.display = '';
-        } else {
-          row.style.display = 'none';
-        }
-      });
+    function switchTab(id) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
     }
   </script>
 </body>
