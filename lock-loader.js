@@ -1,4 +1,5 @@
 
+// lock-loader.js
 fetch('/lock.json')
   .then(res => res.json())
   .then(data => {
@@ -14,6 +15,6 @@ fetch('/lock.json')
       box.innerHTML = "🔒 No qualified Lock of the Day available. Check back tomorrow at 6 AM EST.";
     }
   })
-  .catch(() => {
+  .catch(err => {
     document.querySelector('.lock-box').innerHTML = "🔒 Unable to load Lock of the Day.";
   });
