@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "functions": {
+    "api/scrape_nfl.py": {
+      "runtime": "python3.9"
+    },
+    "api/scrape_nba.py": {
+      "runtime": "python3.9"
+    },
+    "api/scrape_mlb.py": {
+      "runtime": "python3.9"
+    },
+    "api/scrape_ncaaf.py": {
+      "runtime": "python3.9"
+    },
+    "api/scrape_ufc.py": {
+      "runtime": "python3.9"
+    },
+    "api/scrape_ncaab.py": {
+      "runtime": "python3.9"
+    }
+  }
+}
