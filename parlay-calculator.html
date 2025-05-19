@@ -2,27 +2,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>FadeMeBets - Parlay Calculator</title>
-  <link rel="icon" href="/favicon.ico" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Open Sans', sans-serif; padding: 2rem; }
-    .home-logo {
-      position: absolute;
-      top: 10px;
-      left: 20px;
-    }
-    .home-logo img {
-      height: 40px;
-      cursor: pointer;
-    }
-    h1 { color: #c8102e; padding-top: 60px; }
-  </style>
+    <meta charset="UTF-8">
+    <title>Parlay Calculator</title>
+    <style>
+        body { font-family: Arial; padding: 20px; max-width: 600px; margin: auto; }
+        input, button { margin: 5px 0; padding: 10px; width: 100%; }
+        .result { margin-top: 20px; font-weight: bold; }
+    </style>
 </head>
 <body>
-  <a href="index.html" class="home-logo"><img src="logo.png" alt="FadeMeBets"></a>
-  <h1>Parlay Calculator</h1>
-  <p>Calculate payouts across multiple legs.</p>
+    <h2>Parlay Calculator</h2>
+    <div id="legs-container"></div>
+    <button onclick="addLeg()">+ Add Leg</button>
+    <input type="number" id="wager" placeholder="Enter wager amount ($)" />
+    <button onclick="calculateParlay()">Calculate Payout</button>
+    <div class="result" id="parlay-result"></div>
+
+    <script>
+        let legs = 0;
+        function addLeg() {
+            legs++;
+            const container = document.getElementById('legs-container');
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.placeholder = 'Leg ' + legs + ' Odds (e.g., -110)';
+            input.className = 'leg';
+            container.appendChild(input);
+        }
+
+        function convertToDecimal(odds) {
+            return odds > 0 ? (odds / 100) + 1 : (100 / Math.abs(odds)) + 1;
+        }
+
+        function calculateParlay() {
+            const oddsInputs = document.querySelectorAll('.leg');
+            let totalDecimalOdds = 1;
+            oddsInputs.forEach(input => {
+                const odds = parseFloat(input.value);
+                if (!isNaN(odds)) {
+                    totalDecimalOdds *= convertToDecimal(odds);
+                }
+            });
+
+            const wager = parseFloat(document.getElementById('wager').value);
+            const payout = (totalDecimalOdds * wager).toFixed(2);
+            document.getElementById('parlay-result').innerText = 
+                `Total Decimal Odds: ${totalDecimalOdds.toFixed(2)} | Potential Payout: $${payout}`;
+        }
+    </script>
 </body>
 </html>
