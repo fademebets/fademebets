@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,8 +85,34 @@
       margin-top: 2rem;
       font-size: 1.1rem;
     }
-    <script src="lock-loader.js"></script>
+    .subscription-prompt {
+      background-color: #f4f4f4;
+      padding: 1rem;
+      border-left: 5px solid #c8102e;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+    .subscription-prompt h3 {
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .subscription-prompt p {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .subscribe-button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #c8102e;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 5px;
+    }
   </style>
+  <script src="lock-loader.js"></script>
 </head>
 <body>
   <nav>
@@ -96,11 +121,11 @@
       <span class="logo-text">FadeMeBets</span>
     </div>
     <div class="menu">
+      <a href="subscribe.html">Subscribe</a>
       <a href="ev.html">+EV</a>
       <a href="locks.html">Locks</a>
       <a href="standings.html">Standings</a>
       <a href="odds.html">Odds</a>
-      <a href="tools.html">Tools</a>
       <a href="ev-calculator.html">EV Calc</a>
       <a href="parlay-calculator.html">Parlay Calc</a>
       <a href="notifications.html">🔔 Alerts</a>
@@ -123,6 +148,11 @@
       <h1>Welcome To FadeMeBets</h1>
       <h2>Born To Fade</h2>
       <p>Using EV and the eye test to make sure YOU cash out. Track smarter picks, get the highest expected value, and lock in data-backed winners.</p>
+      <div class="subscription-prompt">
+        <h3>Subscribe Now!</h3>
+        <p>Get access to exclusive locks, calculators, and +EV picks by subscribing to our service.</p>
+        <a href="subscribe.html" class="subscribe-button">Subscribe</a>
+      </div>
       <div class="lock-box">
         🔒 <strong>Lock of the Day:</strong> Draymond Green o16.5 Pts + Reb — 79% cover, +26% EV
       </div>
