@@ -1,28 +1,294 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>FadeMeBets - Notifications</title>
-  <link rel="icon" href="/favicon.ico" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Open Sans', sans-serif; padding: 2rem; }
-    .home-logo {
-      position: absolute;
-      top: 10px;
-      left: 20px;
-    }
-    .home-logo img {
-      height: 40px;
-      cursor: pointer;
-    }
-    h1 { color: #c8102e; padding-top: 60px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FadeMeBets - Notifications</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Open Sans', sans-serif;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        nav {
+            background-color: #c8102e;
+            padding: 1rem 2rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        nav .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        nav .logo-container img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        nav .menu a {
+            margin-left: 1rem;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+        }
+        .main {
+            display: flex;
+            flex: 1;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #1c2a39;
+            color: white;
+            padding-top: 2rem;
+        }
+        .sidebar h3 {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar li {
+            padding: 10px 20px;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+        .sidebar li:hover {
+            background-color: #2d3e50;
+        }
+        .content {
+            flex: 1;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .notification-settings {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .notification-settings h2 {
+            color: #c8102e;
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 0;
+        }
+        .notification-option {
+            margin: 1.5rem 0;
+        }
+        .notification-option label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        .notification-option select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+        .save-button {
+            background-color: #c8102e;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        .save-button:hover {
+            background-color: #a00d24;
+        }
+        .notification-status {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            display: none;
+        }
+        .notification-status.success {
+            background-color: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        .notification-status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-  <a href="index.html" class="home-logo"><img src="logo.png" alt="FadeMeBets"></a>
-  <h1>Notifications</h1>
-  <p>Get smart alerts and system messages.</p>
+    <nav>
+        <div class="logo-container">
+            <img src="/logo.png" alt="FadeMeBets Logo">
+            <span class="logo-text">FadeMeBets</span>
+        </div>
+        <div class="menu">
+            <a href="subscribe.html">Subscribe</a>
+            <a href="ev.html">+EV</a>
+            <a href="locks.html">Locks</a>
+            <a href="standings.html">Standings</a>
+            <a href="odds.html">Odds</a>
+            <a href="ev-calculator.html">EV Calc</a>
+            <a href="parlay-calculator.html">Parlay Calc</a>
+            <a href="notifications.html">🔔 Alerts</a>
+        </div>
+    </nav>
+
+    <div class="main">
+        <div class="sidebar">
+            <h3>Sports</h3>
+            <ul>
+                <li><a href="nba.html">NBA</a></li>
+                <li><a href="nfl.html">NFL</a></li>
+                <li><a href="ncaaf.html">NCAAF</a></li>
+                <li><a href="ncaab.html">NCAAB</a></li>
+                <li><a href="mlb.html">MLB</a></li>
+                <li><a href="ufc.html">UFC</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <h1>Notification Settings</h1>
+            <p>Stay updated with the latest picks, odds movements, and betting opportunities.</p>
+            
+            <div class="notification-settings">
+                <h2>Push Notifications</h2>
+                <div class="notification-option">
+                    <label for="lock-picks">Lock Picks</label>
+                    <select id="lock-picks">
+                        <option value="instant">Instant</option>
+                        <option value="daily">Daily Digest</option>
+                        <option value="none">None</option>
+                    </select>
+                </div>
+                
+                <div class="notification-option">
+                    <label for="ev-picks">+EV Picks</label>
+                    <select id="ev-picks">
+                        <option value="instant">Instant</option>
+                        <option value="daily">Daily Digest</option>
+                        <option value="none">None</option>
+                    </select>
+                </div>
+                
+                <div class="notification-option">
+                    <label for="odds-movement">Odds Movement</label>
+                    <select id="odds-movement">
+                        <option value="instant">Instant</option>
+                        <option value="daily">Daily Digest</option>
+                        <option value="none">None</option>
+                    </select>
+                </div>
+                
+                <button class="save-button" onclick="saveNotificationSettings()">Save Settings</button>
+                
+                <div id="notification-status" class="notification-status"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if the browser supports notifications
+        if (!('Notification' in window)) {
+            alert('This browser does not support notifications');
+        }
+        
+        // Request notification permission
+        async function requestNotificationPermission() {
+            try {
+                const permission = await Notification.requestPermission();
+                if (permission === 'granted') {
+                    return true;
+                } else {
+                    alert('Please enable notifications to receive updates');
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error requesting notification permission:', error);
+                return false;
+            }
+        }
+        
+        // Save notification settings
+        async function saveNotificationSettings() {
+            const hasPermission = await requestNotificationPermission();
+            if (!hasPermission) return;
+            
+            const settings = {
+                lockPicks: document.getElementById('lock-picks').value,
+                evPicks: document.getElementById('ev-picks').value,
+                oddsMovement: document.getElementById('odds-movement').value
+            };
+            
+            try {
+                const response = await fetch('/api/save-notification-settings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(settings),
+                });
+                
+                const result = await response.json();
+                
+                const statusDiv = document.getElementById('notification-status');
+                if (result.success) {
+                    statusDiv.className = 'notification-status success';
+                    statusDiv.textContent = 'Settings saved successfully!';
+                } else {
+                    statusDiv.className = 'notification-status error';
+                    statusDiv.textContent = 'Error saving settings. Please try again.';
+                }
+                
+                // Hide status message after 3 seconds
+                setTimeout(() => {
+                    statusDiv.style.display = 'none';
+                }, 3000);
+                
+            } catch (error) {
+                console.error('Error saving notification settings:', error);
+                const statusDiv = document.getElementById('notification-status');
+                statusDiv.className = 'notification-status error';
+                statusDiv.textContent = 'Error saving settings. Please try again.';
+            }
+        }
+        
+        // Load saved settings when page loads
+        async function loadNotificationSettings() {
+            try {
+                const response = await fetch('/api/get-notification-settings');
+                const settings = await response.json();
+                
+                document.getElementById('lock-picks').value = settings.lockPicks || 'none';
+                document.getElementById('ev-picks').value = settings.evPicks || 'none';
+                document.getElementById('odds-movement').value = settings.oddsMovement || 'none';
+                
+            } catch (error) {
+                console.error('Error loading notification settings:', error);
+            }
+        }
+        
+        // Load settings when page loads
+        loadNotificationSettings();
+    </script>
 </body>
 </html>

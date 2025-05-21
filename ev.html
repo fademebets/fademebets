@@ -1,43 +1,241 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>EV Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FadeMeBets - +EV Picks</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial; padding: 20px; max-width: 600px; margin: auto; }
-        input, button { margin: 5px 0; padding: 10px; width: 100%; }
-        .result { margin-top: 20px; font-weight: bold; }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Open Sans', sans-serif;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        nav {
+            background-color: #c8102e;
+            padding: 1rem 2rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        nav .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        nav .logo-container img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        nav .menu a {
+            margin-left: 1rem;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+        }
+        .main {
+            display: flex;
+            flex: 1;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #1c2a39;
+            color: white;
+            padding-top: 2rem;
+        }
+        .sidebar h3 {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar li {
+            padding: 10px 20px;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+        .sidebar li:hover {
+            background-color: #2d3e50;
+        }
+        .content {
+            flex: 1;
+            padding: 2rem;
+        }
+        .ev-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .ev-card {
+            border: 2px solid #c8102e;
+            border-radius: 10px;
+            padding: 1.5rem;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .ev-card h3 {
+            color: #c8102e;
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 0;
+        }
+        .ev-card .sport {
+            font-weight: bold;
+            color: #1c2a39;
+        }
+        .ev-card .odds {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .ev-card .ev {
+            color: #c8102e;
+            font-weight: bold;
+        }
+        .ev-card .confidence {
+            color: #6c757d;
+        }
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .ev-container {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    <h2>Expected Value (EV) Calculator</h2>
-    <input type="number" id="odds" placeholder="Enter odds (e.g., -110)" />
-    <input type="number" id="winProb" placeholder="Enter win probability (%)" />
-    <input type="number" id="stake" placeholder="Enter stake amount ($)" />
-    <button onclick="calculateEV()">Calculate EV</button>
-    <div class="result" id="ev-result"></div>
+    <nav>
+        <div class="logo-container">
+            <img src="/logo.png" alt="FadeMeBets Logo">
+            <span class="logo-text">FadeMeBets</span>
+        </div>
+        <div class="menu">
+            <a href="subscribe.html">Subscribe</a>
+            <a href="ev.html">+EV</a>
+            <a href="locks.html">Locks</a>
+            <a href="standings.html">Standings</a>
+            <a href="odds.html">Odds</a>
+            <a href="ev-calculator.html">EV Calc</a>
+            <a href="parlay-calculator.html">Parlay Calc</a>
+            <a href="notifications.html">🔔 Alerts</a>
+        </div>
+    </nav>
+
+    <div class="main">
+        <div class="sidebar">
+            <h3>Sports</h3>
+            <ul>
+                <li><a href="nba.html">NBA</a></li>
+                <li><a href="nfl.html">NFL</a></li>
+                <li><a href="ncaaf.html">NCAAF</a></li>
+                <li><a href="ncaab.html">NCAAB</a></li>
+                <li><a href="mlb.html">MLB</a></li>
+                <li><a href="ufc.html">UFC</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <h1>+EV Betting Opportunities</h1>
+            <p>Find the best value bets with positive expected value across all major sports.</p>
+            
+            <div id="ev-picks" class="ev-container">
+                <div class="loading">Loading +EV picks...</div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        function calculateEV() {
-            const odds = parseFloat(document.getElementById('odds').value);
-            const winProb = parseFloat(document.getElementById('winProb').value) / 100;
-            const stake = parseFloat(document.getElementById('stake').value);
-
-            let payout = 0;
-            if (odds > 0) {
-                payout = stake * (odds / 100);
-            } else {
-                payout = stake * (100 / Math.abs(odds));
+        async function checkSubscription() {
+            const sessionId = localStorage.getItem('session_id');
+            if (!sessionId) {
+                window.location.href = 'subscribe.html';
+                return;
             }
-
-            const ev = (winProb * payout) - ((1 - winProb) * stake);
-            const evPercent = (ev / stake * 100).toFixed(2);
-            const color = ev >= 0 ? 'green' : 'red';
-
-            document.getElementById('ev-result').innerHTML = 
-                `<span style="color:${color}">EV: $${ev.toFixed(2)} (${evPercent}%)</span>`;
+            
+            try {
+                const response = await fetch(`/api/check-subscription?session_id=${sessionId}`);
+                const data = await response.json();
+                
+                if (!data.subscribed) {
+                    window.location.href = 'subscribe.html';
+                }
+            } catch (error) {
+                console.error('Error checking subscription:', error);
+                window.location.href = 'subscribe.html';
+            }
         }
+        
+        // Check subscription when page loads
+        checkSubscription();
+        
+        // Load EV picks
+        async function loadEVPicks() {
+            try {
+                const response = await fetch('/api/scrape_oddstrader');
+                const data = await response.json();
+                
+                const evContainer = document.getElementById('ev-picks');
+                evContainer.innerHTML = '';
+                
+                // Display picks
+                data.picks.forEach(pick => {
+                    const card = document.createElement('div');
+                    card.className = 'ev-card';
+                    card.innerHTML = `
+                        <h3>${pick.game}</h3>
+                        <div class="sport">${pick.sport}</div>
+                        <div class="pick">${pick.pick}</div>
+                        <div class="odds">Odds: ${pick.odds}</div>
+                        <div class="ev">+EV: ${pick.ev}</div>
+                        <div class="confidence">Confidence: ${pick.confidence}</div>
+                    `;
+                    evContainer.appendChild(card);
+                });
+                
+                // Display player props
+                data.player_props.forEach(prop => {
+                    const card = document.createElement('div');
+                    card.className = 'ev-card';
+                    card.innerHTML = `
+                        <h3>${prop.player}</h3>
+                        <div class="team">${prop.team}</div>
+                        <div class="prop">${prop.prop}</div>
+                        <div class="line">Line: ${prop.line}</div>
+                        <div class="odds">Odds: ${prop.odds}</div>
+                        <div class="ev">+EV: ${prop.ev}</div>
+                    `;
+                    evContainer.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error loading EV picks:', error);
+                document.getElementById('ev-picks').innerHTML = `
+                    <div class="loading">Error loading +EV picks. Please try again later.</div>
+                `;
+            }
+        }
+        
+        // Load picks when page loads
+        loadEVPicks();
+        
+        // Refresh picks every 5 minutes
+        setInterval(loadEVPicks, 5 * 60 * 1000);
     </script>
 </body>
 </html>
