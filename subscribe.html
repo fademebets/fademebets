@@ -4,103 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FadeMeBets - Subscribe</title>
-    <link rel="icon" href="/favicon.ico" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+<link rel="icon" href="/logo.png"/>
+   <link rel="stylesheet" href="styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
     <script src="https://js.stripe.com/v3/"></script>
-    <style>
-        * { box-sizing: border-box; }
-        body {
-            margin: 0;
-            font-family: 'Open Sans', sans-serif;
-            background-color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        nav {
-            background-color: #c8102e;
-            padding: 1rem 2rem;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        nav .logo-container {
-            display: flex;
-            align-items: center;
-        }
-        nav .logo-container img {
-            height: 40px;
-            margin-right: 10px;
-        }
-        nav .menu a {
-            margin-left: 1rem;
-            text-decoration: none;
-            color: white;
-            font-weight: 600;
-        }
-        .main {
-            display: flex;
-            flex: 1;
-        }
-        .content {
-            flex: 1;
-            padding: 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .subscription-plans {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        .plan-card {
-            border: 2px solid #c8102e;
-            border-radius: 10px;
-            padding: 2rem;
-            text-align: center;
-        }
-        .plan-card h3 {
-            color: #c8102e;
-            font-family: 'Montserrat', sans-serif;
-        }
-        .plan-card .price {
-            font-size: 2rem;
-            font-weight: bold;
-            margin: 1rem 0;
-        }
-        .plan-card .features {
-            list-style: none;
-            padding: 0;
-            margin: 1rem 0;
-        }
-        .plan-card .features li {
-            margin: 0.5rem 0;
-        }
-        .subscribe-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background-color: #c8102e;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-top: 1rem;
-            cursor: pointer;
-        }
-        .subscribe-button:hover {
-            background-color: #a00d24;
-        }
-        @media (max-width: 768px) {
-            .subscription-plans {
-                grid-template-columns: 1fr;
-            }
-            nav .menu {
-                display: none;
-            }
-        }
-    </style>
+
 </head>
 <body>
     <nav>
@@ -124,7 +35,7 @@
         <div class="content">
             <h1>Choose Your Subscription Plan</h1>
             <p>Get access to exclusive picks, tools, and notifications to maximize your betting success.</p>
-            
+
             <div class="subscription-plans">
                 <div class="plan-card">
                     <h3>Monthly Plan</h3>
@@ -137,7 +48,7 @@
                     </ul>
                     <button class="subscribe-button" data-plan="monthly">Subscribe Now</button>
                 </div>
-                
+
                 <div class="plan-card">
                     <h3>Annual Plan</h3>
                     <div class="price">$299.99/yr</div>
@@ -156,7 +67,7 @@
 
     <script>
         const stripe = Stripe('pk_test_51RQgUmPs0nNXEgZbJUGYtGLhcIf26AGpEMitfM9olx7dyWAwl0W1VfJUg0SaIV9iFiq6RCfsaULT8QKe8fEIQFyt00wkILAOE6');
-        
+
         document.querySelectorAll('.subscribe-button').forEach(button => {
             button.addEventListener('click', async (e) => {
                 const plan = e.target.dataset.plan;
@@ -170,13 +81,13 @@
                             plan: plan
                         }),
                     });
-                    
+
                     const session = await response.json();
-                    
+
                     const result = await stripe.redirectToCheckout({
                         sessionId: session.id
                     });
-                    
+
                     if (result.error) {
                         alert(result.error.message);
                     }
@@ -188,4 +99,4 @@
         });
     </script>
 </body>
-</html> 
+</html>

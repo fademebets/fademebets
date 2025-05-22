@@ -1,0 +1,420 @@
+/* Main index.html page */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+nav {
+  background-color: #c8102e;
+  padding: 1rem 2rem;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav .logo-container {
+  display: flex;
+  align-items: center;
+}
+
+nav .logo-container img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+nav .menu {
+  display: flex;
+  gap: 0.8rem;
+}
+
+nav .menu a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+nav .menu a:hover {
+  background-color: #a70c23;
+}
+
+.sidebar-toggle {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  width: 220px;
+  background-color: #1c2a39;
+  color: white;
+  padding: 2rem 1rem;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.sidebar h3 {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li {
+  padding: 12px 16px;
+  border-radius: 4px;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.sidebar li:hover {
+  background-color: #2d3e50;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+}
+
+h1, h2 {
+  color: #c8102e;
+  font-family: 'Poppins', sans-serif;
+}
+
+p {
+  margin: 1rem 0;
+}
+
+.lock-box, .subscription-prompt {
+  background-color: #f4f4f4;
+  padding: 1rem 1.5rem;
+  border-left: 5px solid #c8102e;
+  margin: 1.5rem 0;
+  font-size: 1.05rem;
+  border-radius: 6px;
+}
+
+.subscription-prompt h3 {
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.subscription-prompt p {
+  text-align: center;
+}
+
+.subscribe-button {
+  display: inline-block;
+  padding: 12px;
+  background-color: #c8102e;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.subscribe-button:hover {
+  background-color: #a70c23;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  nav {
+    flex-wrap: wrap;
+  }
+
+  .sidebar-toggle {
+    display: block;
+  }
+
+  nav .menu {
+    overflow-x: auto;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  nav .menu::-webkit-scrollbar {
+    display: none;
+  }
+
+  nav .menu a {
+    flex: 0 0 auto;
+  }
+
+  .sidebar h3 {
+    text-align: left;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    height: calc(100% - 64px);
+    width: 420px;
+    background-color: #1c2a39;
+    padding: 1rem;
+    transform: translateX(-100%);
+    z-index: 1000;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main {
+    flex-direction: column;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+}
+
+
+
+
+/* Content Section Styling */
+.content {
+  flex: 1;
+  padding: 3rem 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.content h1 {
+  font-size: 2.5rem;
+  color: #1c2a39;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.content h2 {
+  font-size: 1.8rem;
+  color: #c8102e;
+  margin-bottom: 1.5rem;
+}
+
+.content p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #444;
+  margin-bottom: 2rem;
+}
+
+/* Subscription Box */
+.subscription-prompt {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+}
+
+.subscription-prompt h3 {
+  font-size: 1.6rem;
+  color: #1c2a39;
+  margin-bottom: 0.75rem;
+}
+
+.subscription-prompt p {
+  font-size: 1.05rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.subscribe-button {
+  display: inline-block;
+  padding: 14px 24px;
+  background-color: #c8102e;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.subscribe-button:hover {
+  background-color: #a70c23;
+}
+
+/* Lock Box */
+.lock-box {
+  background-color: #fefefe;
+  border-left: 5px solid #c8102e;
+  border: 1px solid rgba(0,0,0,0.1); /* Light black border */
+  padding: 1.25rem 1.75rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  color: #333;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.lock-box strong {
+  font-weight: 700;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .content {
+    padding: 2rem 1.2rem;
+  }
+
+  .content h1 {
+    font-size: 2rem;
+  }
+
+  .content h2 {
+    font-size: 1.5rem;
+  }
+
+  .subscription-prompt {
+    padding: 1.5rem;
+  }
+
+  .lock-box {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .subscribe-button {
+    padding: 12px 20px;
+    width: 100%;
+  }
+}
+
+
+/* Main subscribe.html page */
+
+/* Subscription Plans */
+.subscription-plans {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.plan-card {
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.plan-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.plan-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: #222;
+}
+
+.plan-card .price {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #c8102e;
+  margin-bottom: 1rem;
+}
+
+.plan-card .features {
+  list-style: none;
+  margin: 1.5rem 0;
+  padding: 0;
+}
+
+.plan-card .features li {
+  font-size: 1rem;
+  padding: 0.4rem 0;
+  color: #444;
+}
+
+/* Subscribe Button */
+.subscribe-button {
+  display: inline-block;
+  background-color: #c8102e;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.9rem 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.subscribe-button:hover {
+  background-color: #a80e26;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  nav {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .menu a {
+    margin: 0.5rem;
+  }
+
+  .content h1 {
+    font-size: 2rem;
+  }
+
+  .plan-card {
+    padding: 1.5rem;
+  }
+}
